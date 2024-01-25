@@ -1,7 +1,10 @@
 import React from "react";
 import "./Profile.css";
+import { useNavigate } from "react-router-dom";
 
-const Account = () => {
+const AccountInfo = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="container-box">
@@ -61,10 +64,22 @@ const Account = () => {
             </div>
 
             <div className="buttonSets">
-              <button className="btn-next btn-common" type="submit">
+              <button
+                className="btn-next btn-common"
+                type="submit"
+                onClick={() => {
+                  navigate("/dashboard");
+                }}
+              >
                 Submit
               </button>
-              <button className="btn-cancel btn-common" type="button">
+              <button
+                className="btn-cancel btn-common"
+                type="button"
+                onClick={() => {
+                  navigate("/dashboard");
+                }}
+              >
                 Cancel
               </button>
             </div>
@@ -75,4 +90,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default AccountInfo;

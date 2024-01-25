@@ -4,7 +4,6 @@ import MyPRofile from "./Components/MyProfile";
 import Account from "./Components/AccountInfo";
 import Dashboard from "./Components/Dashboard";
 import NavBar from "./Components/NavBar";
-import LeftNav from "./LeftNav";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import HomePage from "./Components/HomePage/HomePage";

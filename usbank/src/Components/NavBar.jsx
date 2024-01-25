@@ -12,7 +12,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary fixed shadow">
         <div className="container-fluid">
           <button
             className="navbar-toggler"

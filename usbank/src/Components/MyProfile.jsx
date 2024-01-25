@@ -1,7 +1,9 @@
 import React from "react";
 import "./Profile.css";
+import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="container-box">
@@ -65,10 +67,18 @@ const MyProfile = () => {
             </div>
 
             <div className="buttonSets">
-              <button className="btn-next btn-common" type="submit">
+              <button
+                className="btn-next btn-common"
+                type="submit"
+                onClick={() => navigate("/account")}
+              >
                 Next
               </button>
-              <button className="btn-cancel btn-common" type="button">
+              <button
+                className="btn-cancel btn-common"
+                type="button"
+                onClick={() => navigate("/dashboard")}
+              >
                 Cancel
               </button>
             </div>

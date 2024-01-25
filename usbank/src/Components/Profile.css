@@ -99,6 +99,7 @@ input {
 }
 .mb20 {
   margin-bottom: 20px;
+  cursor: pointer;
 }
 .list {
   width: 150%;
@@ -129,4 +130,7 @@ input {
 }
 .title {
   margin-left: -400px;
+}
+.fixed {
+  position: fixed;
 }
