@@ -5,26 +5,27 @@ import Account from "./Components/AccountInfo";
 import Dashboard from "./Components/Dashboard";
 import NavBar from "./Components/NavBar";
 import LeftNav from "./LeftNav";
+import Login from "./Components/Login/Login";
+import Register from "./Components/Register/Register";
+import HomePage from "./Components/HomePage/HomePage";
 
 function App() {
   return (
     <>
-      <NavBar />
+      {/* <HomePage /> */}
+
       <div>
-        <div className="row">
-          <div className="col-2">
-            <LeftNav />
-          </div>
-          <div className="col-10">
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Dashboard />}></Route>
-                <Route path="/account" element={<Account />}></Route>
-                <Route path="/myprofile" element={<MyPRofile />}></Route>
-              </Routes>
-            </BrowserRouter>
-          </div>
-        </div>
+        <BrowserRouter>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/account" element={<Account />}></Route>
+            <Route path="/myprofile" element={<MyPRofile />}></Route>
+          </Routes>
+        </BrowserRouter>
       </div>
     </>
   );

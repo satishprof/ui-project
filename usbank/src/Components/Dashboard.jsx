@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import "./Profile.css";
+import LeftNav from "../LeftNav";
 
 const Dashboard = () => {
   const [loanData, setLoanData] = useState([
@@ -35,6 +37,14 @@ const Dashboard = () => {
   const handleSave = (id) => {
     console.log(`Saving data for loan ID: ${id}`);
   };
+  const navigate = useNavigate();
+  const loggedInUserInfo = JSON.parse(sessionStorage.getItem("loggedin-user"));
+
+  useEffect(() => {
+    if (!loggedInUserInfo) {
+      navigate("/");
+    }
+  }, []);
 
   const columnDefs = [
     { headerName: "Loan ID", field: "id", filter: "agTextColumnFilter" },
@@ -55,6 +65,17 @@ const Dashboard = () => {
     },
   ];
 
+  // enables pagination in the grid
+  const pagination = true;
+
+  // sets 8 rows per page (default is 100)
+  const paginationPageSize = 8;
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("loggedin-user");
+    navigate("/");
+  };
+
   const frameworkComponents = {
     optionsRenderer: (props) => (
       <button className="btn-next" onClick={() => handleSave(props.data.id)}>
@@ -65,19 +86,36 @@ const Dashboard = () => {
 
   return (
     <div className="container-dashboard">
-      <h4 className="heading-text-smaller text-grey text-center pd20">
-        Welcome User
-      </h4>
-      <div
-        className="ag-theme-quartz"
-        style={{ height: "300px", width: "100%" }}
-      >
-        <AgGridReact
-          columnDefs={columnDefs}
-          rowData={loanData}
-          frameworkComponents={frameworkComponents}
-          domLayout="autoHeight"
-        />
+      <div className="row">
+        <div className="col-3 leftnav">
+          <LeftNav />
+        </div>
+        <div className="col-9">
+          <div className="dashboard-heading">
+            <h3 className="title">Welcome User</h3>
+            <button
+              type="button"
+              class="btn btn-primary button"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
+          <div
+            className="ag-theme-quartz dashboard-grid"
+            style={{ height: "150px", width: "117%" }}
+          >
+            <AgGridReact
+              columnDefs={columnDefs}
+              rowData={loanData}
+              frameworkComponents={frameworkComponents}
+              domLayout="autoHeight"
+              pagination={pagination}
+              paginationPageSize={paginationPageSize}
+              paginationAutoPageSize={true}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -76,7 +76,8 @@ input {
   margin: 0 auto;
 }
 .shadow {
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
+  border: 1px solid black;
 }
 .mb30 {
   margin-bottom: 30px;
@@ -89,11 +90,12 @@ input {
 }
 .listed {
   list-style-type: none;
-  height: 100vh;
+  height: 520px;
   width: 110%;
   margin: 0 auto;
-  padding: 20px;
+  padding-top: 20px;
   list-style-type: none;
+  margin-left: -138px;
 }
 .mb20 {
   margin-bottom: 20px;
@@ -108,4 +110,23 @@ input {
   align-items: center;
   justify-content: center;
   padding: 30px 0;
+}
+.dashboard-heading {
+  display: flex;
+  padding: 0 30px;
+  justify-content: center;
+  padding: 15px 0;
+}
+.dashboard-heading title {
+  padding-right: 50px;
+}
+.button {
+  margin-top: 10px;
+  margin-right: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.title {
+  margin-left: -400px;
 }

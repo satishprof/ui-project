@@ -1,7 +1,15 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  // const navigate = useNavigate();
+
+  // const handleLogout = () => {
+  //   sessionStorage.removeItem("loggedin-user");
+  //   navigate("/");
+  // };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
@@ -28,11 +36,6 @@ const NavBar = () => {
                 </a>
               </li>
             </ul>
-            <form className="d-flex" role="search">
-              <button className="btn btn-outline-success" type="submit">
-                LogOut
-              </button>
-            </form>
           </div>
         </div>
       </nav>
