@@ -68,3 +68,44 @@ input {
   display: flex;
   justify-content: flex-end;
 }
+.text-blue {
+  color: blue;
+}
+.container-dashboard {
+  width: 950px;
+  margin: 0 auto;
+}
+.shadow {
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+.mb30 {
+  margin-bottom: 30px;
+}
+.pd20 {
+  padding-top: 20px;
+}
+.active {
+  font-weight: 600;
+}
+.listed {
+  list-style-type: none;
+  height: 100vh;
+  width: 110%;
+  margin: 0 auto;
+  padding: 20px;
+  list-style-type: none;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.list {
+  width: 150%;
+}
+.text-center {
+  padding-top: 20px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+}
