@@ -4,7 +4,7 @@
 }
 
 .welcome-header {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .user-links--wrapper {
@@ -29,7 +29,7 @@
 .user-link {
   text-decoration: none;
   color: #fff;
-  background: darkmagenta;
+  background: blue;
   padding: 0.5rem 2rem;
   border-radius: 5px;
 }

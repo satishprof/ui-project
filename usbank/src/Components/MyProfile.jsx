@@ -1,8 +1,11 @@
 import React from "react";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const MyProfile = () => {
+  const [submitted, setSubmitted] = useState(false);
+
   const navigate = useNavigate();
   return (
     <>
@@ -70,7 +73,12 @@ const MyProfile = () => {
               <button
                 className="btn-next btn-common"
                 type="submit"
-                onClick={() => navigate("/account")}
+                onClick={() => {
+                  setSubmitted(true);
+                  if (submitted) {
+                    navigate("/account");
+                  }
+                }}
               >
                 Next
               </button>

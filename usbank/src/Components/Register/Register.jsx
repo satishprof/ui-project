@@ -37,17 +37,11 @@ export default function Register() {
     alert("Registration succesful, redirecting to home page to login");
     navigate("/");
   };
-  // useEffect(() => {
-  //   const today = new Date().toISOString().split("T")[0];
-  //   document
-  //     .getElementsByClassName("bms-input--field-date")[0]
-  //     .setAttribute("max", today);
-  // }, []);
 
   return (
     <div className="registration-info--wrapper">
       <h1
-        className="registration-info--header"
+        className="registration-info--header text-center"
         data-testid="registration-header"
       >
         Register with us by entering below details
@@ -115,7 +109,7 @@ export default function Register() {
             <p className="bms-form-error-message">{errors.phone.message}</p>
           )}
         </div>
-        <input type="submit" className="cta-submit" value="Register" />
+        <input type="submit" className="input-button" value="Register" />
       </form>
     </div>
   );

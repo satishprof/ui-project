@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const {
@@ -63,8 +63,19 @@ export default function Login() {
             <p className="bms-form-error-message">{errors.password.message}</p>
           )}
         </div>
-        <input type="submit" className="cta-submit" value="Login" />
+        <input type="submit" className="input-button" value="Login" />
       </form>
+      <div>
+        <h5 class="register-link">
+          If you haven't registered Please
+          <div
+            onClick={() => navigate("/register")}
+            className="register-button"
+          >
+            <h5>Register</h5>here...
+          </div>
+        </h5>
+      </div>
     </div>
   );
 }
