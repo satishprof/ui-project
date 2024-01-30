@@ -5,12 +5,18 @@ import { useNavigate } from "react-router-dom";
 const AccountInfo = () => {
   const navigate = useNavigate();
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    event.target.reset();
+    navigate("/dashboard");
+  };
+
   return (
     <>
       <div className="container-box">
         <h2 className="heading-text">Account Information</h2>
         <div className="form container">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="accountingFirm" className="text-grey mb7">
                 Accounting Firm:
@@ -64,13 +70,7 @@ const AccountInfo = () => {
             </div>
 
             <div className="buttonSets">
-              <button
-                className="btn-next btn-common"
-                type="submit"
-                onClick={() => {
-                  navigate("/dashboard");
-                }}
-              >
+              <button className="btn-next btn-common" type="submit">
                 Submit
               </button>
               <button

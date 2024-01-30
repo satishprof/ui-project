@@ -7,13 +7,13 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import "./Profile.css";
 
 const DashboardGrid = () => {
-  const [isEdit, setisEdit] = useState(true);
+  const [isEdit, setIsEdit] = useState();
+  console.log(isEdit);
   const [loanData, setLoanData] = useState([
     {
       id: 1110011,
       purpose: "Home Loan",
       status: "Approved",
-      options: "{<button>Save</button>}",
     },
     { id: 1210021, purpose: "Car Loan", status: "Pending" },
     { id: 1120012, purpose: "Education Loan", status: "Rejected" },
@@ -63,8 +63,9 @@ const DashboardGrid = () => {
           <button
             className="btn-next"
             onClick={() => {
+              setIsEdit(false);
+              console.log(isEdit);
               navigate("/myprofile");
-              setisEdit(false);
             }}
           >
             {isEdit ? "Edit" : "Save"}
@@ -90,7 +91,7 @@ const DashboardGrid = () => {
     <>
       <div
         className="ag-theme-quartz dashboard-grid"
-        style={{ height: "150px", width: "117%" }}
+        style={{ height: "150px", width: "85%" }}
       >
         <AgGridReact
           columnDefs={columnDefs}

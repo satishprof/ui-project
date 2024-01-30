@@ -63,7 +63,7 @@ const Dashboard = () => {
             </li>
           </ul>
         </div>
-        <div className="col-9">
+        <div className="col-9 grid">
           <div className="dashboard-heading">
             <h3 className="title">Welcome User</h3>
             <button
