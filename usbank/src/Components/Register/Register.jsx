@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -47,6 +47,32 @@ export default function Register() {
         Register with us by entering below details
       </h1>
       <form onSubmit={handleSubmit(onSubmit)} className="bms-form">
+        <div className="bms-input--wrapper">
+          <label>
+            Firstname:
+            <input
+              {...register("firstname", {
+                required: "Firstname is required",
+              })}
+              className="bms-input--field"
+            />
+          </label>
+          {errors.firstname && (
+            <p className="bms-form-error-message">{errors.firstname.message}</p>
+          )}
+        </div>
+        <div className="bms-input--wrapper">
+          <label>
+            Lastname:
+            <input
+              {...register("lastname", { required: "Lastname is required" })}
+              className="bms-input--field"
+            />
+          </label>
+          {errors.lastname && (
+            <p className="bms-form-error-message">{errors.lastname.message}</p>
+          )}
+        </div>
         <div className="bms-input--wrapper">
           <label>
             Username:
