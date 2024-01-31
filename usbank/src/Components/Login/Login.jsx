@@ -34,7 +34,7 @@ export default function Login() {
   };
   return (
     <div className="login-info--wrapper">
-      <h1 className="login-info--header" data-testid="login-header">
+      <h1 className="login-info--header row col-12 d-flex justify-content-center" data-testid="login-header">
         Log into BMS below
       </h1>
       <form onSubmit={handleSubmit(onSubmit)} className="bms-form">
@@ -65,7 +65,12 @@ export default function Login() {
         </div>
         <input type="submit" className="input-button" value="Login" />
       </form>
-      <div>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+      }}>
         <h5 className="register-link">
           If you haven't registered Please
           <div
