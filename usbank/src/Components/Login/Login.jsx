@@ -66,7 +66,7 @@ export default function Login() {
         <input type="submit" className="input-button" value="Login" />
       </form>
       <div>
-        <h5 class="register-link">
+        <h5 className="register-link">
           If you haven't registered Please
           <div
             onClick={() => navigate("/register")}
