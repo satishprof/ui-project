@@ -1,109 +1,158 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  useTable,
+  useSortBy,
+  useGlobalFilter,
+  usePagination,
+} from "react-table";
 import { useNavigate } from "react-router-dom";
-import { AgGridReact } from "ag-grid-react";
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-quartz.css";
-import "./Profile.css";
 
 const DashboardGrid = () => {
-  const [isEdit, setIsEdit] = useState();
-  console.log(isEdit);
-  const [loanData, setLoanData] = useState([
-    {
-      id: 1110011,
-      purpose: "Home Loan",
-      status: "Approved",
-    },
-    { id: 1210021, purpose: "Car Loan", status: "Pending" },
-    { id: 1120012, purpose: "Education Loan", status: "Rejected" },
-    { id: 133011, purpose: "Personal Loan", status: "Approved" },
-    { id: 1512011, purpose: "Business Loan", status: "Pending" },
-    { id: 1613012, purpose: "Home Loan", status: "Approved" },
-    { id: 1724013, purpose: "Car Loan", status: "Rejected" },
-    { id: 1835014, purpose: "Education Loan", status: "Pending" },
-    { id: 1946015, purpose: "Personal Loan", status: "Approved" },
-    { id: 2057016, purpose: "Business Loan", status: "Pending" },
-    { id: 2168017, purpose: "Home Loan", status: "Rejected" },
-    { id: 2279018, purpose: "Car Loan", status: "Approved" },
-    { id: 2390019, purpose: "Education Loan", status: "Pending" },
-    { id: 241010, purpose: "Personal Loan", status: "Approved" },
-    { id: 252110, purpose: "Business Loan", status: "Rejected" },
-    { id: 263210, purpose: "Home Loan", status: "Pending" },
-    { id: 274310, purpose: "Car Loan", status: "Approved" },
-    { id: 285410, purpose: "Education Loan", status: "Pending" },
-    { id: 296510, purpose: "Personal Loan", status: "Approved" },
-  ]);
-
-  const handleSave = (id) => {
-    console.log(`Saving data for loan ID: ${id}`);
-  };
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const loggedInUserInfo = JSON.parse(sessionStorage.getItem("loggedin-user"));
 
   useEffect(() => {
-    if (!loggedInUserInfo) {
-      navigate("/");
-    }
+    axios
+      .get("http://localhost:5000/loaninfo")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
-  const columnDefs = [
-    { headerName: "Loan ID", field: "id", filter: "agTextColumnFilter" },
+  const columns = [
+    { Header: "Loan Id", accessor: "id" },
+    { Header: "Purpose of Loan", accessor: "purpose" },
+    { Header: "Status", accessor: "status" },
     {
-      headerName: "Purpose of Loan",
-      field: "purpose",
-      filter: "agTextColumnFilter",
-    },
-    { headerName: "Status", field: "status", filter: "agTextColumnFilter" },
-    {
-      headerName: "Action",
-      field: "price",
-      cellRenderer: () => (
-        <div>
-          <button
-            className="btn-next"
-            onClick={() => {
-              setIsEdit(false);
-              console.log(isEdit);
-              navigate("/myprofile");
-            }}
-          >
-            {isEdit ? "Edit" : "Save"}
-          </button>
-        </div>
+      Header: "Options",
+      accessor: "options",
+      Cell: ({ row }) => (
+        <button onClick={() => handleButtonClick(row)}>
+          {row.original.isEditing ? "Save" : "Edit"}
+        </button>
       ),
     },
   ];
 
-  // const frameworkComponents = {
-  //   optionsRenderer: (props) => (
-  //     <button className="btn-next" onClick={() => handleSave(props.data.id)}>
-  //       Save
-  //     </button>
-  //   ),
-  // };
-  // enables pagination in the grid
-  const pagination = true;
+  const handleButtonClick = (row) => {
+    // Handle the button click here
+    console.log("Button Clicked for ID:", row.original.id);
 
-  // sets 8 rows per page (default is 100)
-  const paginationPageSize = 8;
-  return (
-    <>
-      <div
-        className="ag-theme-quartz dashboard-grid"
-        style={{ height: "150px", width: "85%" }}
-      >
-        <AgGridReact
-          columnDefs={columnDefs}
-          rowData={loanData}
-          // frameworkComponents={frameworkComponents}
-          domLayout="autoHeight"
-          pagination={pagination}
-          paginationPageSize={paginationPageSize}
-          paginationAutoPageSize={true}
-        />
+    // If you want to modify the data when the button is clicked, you can use setData
+    // For example, toggle the isEditing property
+    setData((prevData) => {
+      return prevData.map((item) => {
+        console.log(item);
+        if (item.id === row.original.id) {
+          navigate("/myprofile");
+          return { ...item, isEditing: !item.isEditing };
+        }
+        return item;
+      });
+    });
+  };
+
+  const GridTable = () => {
+    const {
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      page,
+      prepareRow,
+      state: { pageIndex, pageSize, globalFilter },
+      setGlobalFilter,
+      gotoPage,
+      previousPage,
+      nextPage,
+      canPreviousPage,
+      canNextPage,
+    } = useTable(
+      {
+        columns,
+        data,
+        initialState: { pageIndex: 0, pageSize: 6 },
+      },
+      useGlobalFilter,
+      useSortBy,
+      usePagination
+    );
+
+    return (
+      <div>
+        <div>
+          <input
+            value={globalFilter || ""}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            placeholder="Search..."
+          />
+        </div>
+        <table {...getTableProps()} className="table">
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : ""}
+                    </span>
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <div>
+          <button onClick={() => gotoPage(0)} disabled={pageIndex === 0}>
+            {"<<"}
+          </button>{" "}
+          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            Previous
+          </button>{" "}
+          <button onClick={() => nextPage()} disabled={!canNextPage}>
+            Next
+          </button>{" "}
+          <button
+            onClick={() => gotoPage(pageIndex + 1)}
+            disabled={!canNextPage}
+          >
+            {">>"}
+          </button>{" "}
+          <span>
+            Page{" "}
+            <strong>
+              {pageIndex + 1} of {page.length}
+            </strong>{" "}
+          </span>
+        </div>
       </div>
-    </>
+    );
+  };
+
+  return (
+    <div className="App">
+      <GridTable />
+    </div>
   );
 };
 
