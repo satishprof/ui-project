@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import MyPRofile from "./Components/MyProfile";
-import Account from "./Components/AccountInfo";
-import Dashboard from "./Components/Dashboard";
-import NavBar from "./Components/NavBar";
+import MyPRofile from "./Components/MyProfile/MyProfile";
+import Account from "./Components/AccountInfo/AccountInfo";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import NavBar from "./Components/Navbar/NavBar";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import HomePage from "./Components/HomePage/HomePage";

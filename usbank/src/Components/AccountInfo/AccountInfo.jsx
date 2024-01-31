@@ -1,5 +1,5 @@
 import React from "react";
-import "./Profile.css";
+import "../Profile.css";
 import { useNavigate } from "react-router-dom";
 
 const AccountInfo = () => {
@@ -13,7 +13,7 @@ const AccountInfo = () => {
 
   return (
     <>
-      <div className="container-box" data-testid = "container-box">
+      <div className="container-box" data-testid="container-box">
         <h2 className="heading-text">Account Information</h2>
         <div className="form container">
           <form onSubmit={handleSubmit}>

@@ -7,6 +7,7 @@ import {
   usePagination,
 } from "react-table";
 import { useNavigate } from "react-router-dom";
+import "../Profile.css";
 
 const DashboardGrid = () => {
   const [data, setData] = useState([]);
@@ -150,7 +151,7 @@ const DashboardGrid = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App" data-testid="grid">
       <GridTable />
     </div>
   );

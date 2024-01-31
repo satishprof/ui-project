@@ -1,5 +1,5 @@
 import React from "react";
-import "./Profile.css";
+import "../Profile.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,7 +14,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="container-box">
+    <div className="container-box" data-testid="container-box">
       <h2 className="heading-text">My Profile</h2>
       <div className="form container">
         <form onSubmit={handleSubmit}>

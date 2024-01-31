@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardGrid from "./DashboardGrid";
-import MyProfile from "./MyProfile";
-import AccountInfo from "./AccountInfo";
+import DashboardGrid from "../DashboardGrid/DashboardGrid";
+import MyProfile from "../MyProfile/MyProfile";
+import AccountInfo from "../AccountInfo/AccountInfo";
 
 const Dashboard = () => {
   const [isDashboard, setIsDashboard] = useState(true);
@@ -24,7 +24,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container-dashboard">
+    <div className="container-dashboard" data-testid="container-dashboard">
       <div className="row">
         <div className="col-3 leftnav">
           <ul className="listed navLeft shadow">

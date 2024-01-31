@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { useNavigate } from "react-router-dom";
+import "../Profile.css";
 
 const NavBar = () => {
   // const navigate = useNavigate();
@@ -12,7 +13,10 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary fixed shadow">
+      <nav
+        className="navbar navbar-expand-lg bg-body-tertiary fixed shadow"
+        data-testid="navbar"
+      >
         <div className="container-fluid">
           <button
             className="navbar-toggler"
