@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "ag-grid-community": "^31.0.2",
     "ag-grid-enterprise": "^31.0.2",
@@ -14,7 +13,6 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.3",
     "react-native-easy-grid": "^0.2.2",
-    "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -41,5 +39,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^14.2.0",
+    "jest": "^27.5.1",
+    "react-router-dom": "^6.21.3"
   }
 }
