@@ -23,6 +23,7 @@
 .bms-select--field {
   width: 100%;
   margin: 0.5rem 0;
+  height:35px
 }
 
 .bms-input--field {
@@ -37,7 +38,7 @@
 .bms-input--field:focus,
 .bms-select--field:active,
 .bms-select--field:focus {
-  outline: 1px solid red;
+  outline: 1px solid yellow;
 }
 
 .bms-form-error-message {

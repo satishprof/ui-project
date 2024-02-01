@@ -34,9 +34,9 @@ export default function Login() {
   };
   return (
     <div className="login-info--wrapper">
-      <h1 className="login-info--header row col-12 d-flex justify-content-center" data-testid="login-header">
+      <h3 className="login-info--header row col-12 d-flex justify-content-center" data-testid="login-header">
         Log into BMS below
-      </h1>
+      </h3>
       <form onSubmit={handleSubmit(onSubmit)} className="bms-form">
         <div className="bms-input--wrapper">
           <label>
@@ -71,13 +71,13 @@ export default function Login() {
         justifyContent: 'center',
         
       }}>
-        <h5 className="register-link">
+        <h5 className="register-link" style={{marginTop:"10px",marginLeft:"0px"}}>
           If you haven't registered Please
           <div
             onClick={() => navigate("/register")}
             className="register-button"
           >
-            <h5>Register</h5>here...
+            <h5 style={{marginTop:"10px",marginLeft:"40px"}}><a href = "."> Register here </a></h5>
           </div>
         </h5>
       </div>

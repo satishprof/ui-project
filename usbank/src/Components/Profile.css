@@ -71,7 +71,7 @@ input {
   justify-content: flex-end;
 }
 .text-blue {
-  color: blue;
+  color: green;
 }
 .container-dashboard {
   /* width: 950px; */
@@ -125,6 +125,7 @@ input {
   padding: 0 30px;
   justify-content: center;
   padding: 15px 0;
+  padding-left: 10px;
 }
 .dashboard-heading title {
   padding-right: 50px;
@@ -145,12 +146,14 @@ input {
 .input-button {
   text-decoration: none;
   color: #fff;
-  background: blue;
+  background: green;
   padding: 0.5rem 2rem;
   border-radius: 5px;
   border: 0;
-  margin: 1rem;
+  margin-left: 300px;
   font-size: 1rem;
+  width: 100px;
+  margin-top: 15px;
 }
 .text-center {
   justify-content: center;

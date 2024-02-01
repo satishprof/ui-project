@@ -40,12 +40,12 @@ export default function Register() {
 
   return (
     <div className="registration-info--wrapper">
-      <h1
+      <h3
         className="registration-info--header text-center"
         data-testid="registration-header"
       >
         Register with us by entering below details
-      </h1>
+      </h3>
       <form onSubmit={handleSubmit(onSubmit)} className="bms-form">
         <div className="bms-input--wrapper">
           <label>
@@ -135,7 +135,7 @@ export default function Register() {
             <p className="bms-form-error-message">{errors.phone.message}</p>
           )}
         </div>
-        <input type="submit" className="input-button" value="Register" />
+        <input type="submit" className="input-button" value="Register" style={{display:"flex",justifyContent:"center"}} />
       </form>
     </div>
   );
