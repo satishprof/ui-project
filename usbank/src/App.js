@@ -7,27 +7,32 @@ import NavBar from "./Components/Navbar/NavBar";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import HomePage from "./Components/HomePage/HomePage";
-
+import { ContextProvider } from "./Components/Context/Context";
+import { useState } from "react";
 function App() {
+  const [toggle, setToggle] = useState(false);
   return (
     <>
-      {/* <HomePage /> */}
-
+      {/* {/ <HomePage /> /} */}
       <div>
         <BrowserRouter>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />}></Route>
-            <Route path="/account" element={<Account />}></Route>
-            <Route path="/myprofile" element={<MyPRofile />}></Route>
-          </Routes>
+          <ContextProvider>
+            <NavBar toggle={{ toggle, setToggle }} />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route
+                path="/dashboard"
+                element={<Dashboard toggle={{ toggle }} />}
+              ></Route>
+              <Route path="/account" element={<Account />}></Route>
+              <Route path="/myprofile" element={<MyPRofile />}></Route>
+            </Routes>
+          </ContextProvider>
         </BrowserRouter>
       </div>
     </>
   );
 }
-
 export default App;

@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
 export default function Register() {
   const {
     register,
@@ -12,9 +11,8 @@ export default function Register() {
   } = useForm();
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    const existingUsers = JSON.parse(
-      sessionStorage.getItem("registrationData")
-    );
+    console.log("data", data);
+    const existingUsers = JSON.parse(localStorage.getItem("registrationData"));
     const currentUser = existingUsers?.find(
       (user) => user?.username === data?.username
     );
@@ -32,12 +30,11 @@ export default function Register() {
     } else {
       updatedUsers = (existingUsers || []).concat(data);
     }
-    sessionStorage.setItem("registrationData", JSON.stringify(updatedUsers));
+    localStorage.setItem("registrationData", JSON.stringify(updatedUsers));
     reset();
     alert("Registration succesful, redirecting to home page to login");
     navigate("/");
   };
-
   return (
     <div className="registration-info--wrapper">
       <h3
@@ -135,7 +132,12 @@ export default function Register() {
             <p className="bms-form-error-message">{errors.phone.message}</p>
           )}
         </div>
-        <input type="submit" className="input-button" value="Register" style={{display:"flex",justifyContent:"center"}} />
+        <input
+          type="submit"
+          className="input-button"
+          value="Register"
+          style={{ display: "flex", justifyContent: "center" }}
+        />
       </form>
     </div>
   );

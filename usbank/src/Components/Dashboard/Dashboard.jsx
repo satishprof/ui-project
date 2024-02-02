@@ -3,31 +3,31 @@ import { useNavigate } from "react-router-dom";
 import DashboardGrid from "../DashboardGrid/DashboardGrid";
 import MyProfile from "../MyProfile/MyProfile";
 import AccountInfo from "../AccountInfo/AccountInfo";
-
-const Dashboard = () => {
+const Dashboard = ({ toggle }) => {
   const [isDashboard, setIsDashboard] = useState(true);
   const [isMyProfile, setIsMyProfile] = useState();
   const [isAccountInfo, setIsAccountInfo] = useState();
-
   const navigate = useNavigate();
-  const loggedInUserInfo = JSON.parse(sessionStorage.getItem("loggedin-user"));
-
+  const loggedInUserInfo = JSON.parse(localStorage.getItem("loggedin-user"));
+  console.log("toggle", toggle?.toggle);
   useEffect(() => {
     if (!loggedInUserInfo) {
       navigate("/");
     }
   }, []);
-
   const handleLogout = () => {
-    sessionStorage.removeItem("loggedin-user");
+    localStorage.removeItem("loggedin-user");
     navigate("/");
   };
-
   return (
     <div className="container-dashboard" data-testid="container-dashboard">
       <div className="row">
-        <div className="col-3 leftnav">
-          <ul className="listed navLeft shadow">
+        <div
+          className={`col-lg-3 col-md-6 col-sm-6 ${
+            toggle?.toggle ? "leftnav1" : "leftnav"
+          }`}
+        >
+          <ul className={`listed navLeft shadow1 `}>
             <li className="list text-side-nav active mb20">
               <div
                 onClick={() => {
@@ -65,7 +65,9 @@ const Dashboard = () => {
         </div>
         <div className="col-9 grid">
           <div className="dashboard-heading">
-            <h3 className="title">Welcome User</h3>
+            <h3 className="title" style={{ margin: "auto" }}>
+              Welcome User
+            </h3>
             <button
               type="button"
               class="btn btn-primary button"
@@ -82,5 +84,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
 export default Dashboard;

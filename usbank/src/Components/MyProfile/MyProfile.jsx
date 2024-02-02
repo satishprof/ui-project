@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../Profile.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { UserContext } from "../Context/Context";
 const MyProfile = () => {
   const [submitted, setSubmitted] = useState(false);
-
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-
+  console.log("user", user, setUser);
   const handleSubmit = (event) => {
     event.preventDefault();
     navigate("/account");
   };
-
   return (
     <div className="container-box" data-testid="container-box">
       <h2 className="heading-text">My Profile</h2>
@@ -27,10 +26,10 @@ const MyProfile = () => {
               id="firstName"
               className="input-feild"
               name="firstName"
+              value={user?.firstname}
               required
             />
           </div>
-
           <div>
             <label htmlFor="lastName" className="text-grey mb7">
               Last Name:
@@ -40,10 +39,10 @@ const MyProfile = () => {
               className="input-feild"
               id="lastName"
               name="lastName"
+              value={user?.lastname}
               required
             />
           </div>
-
           <div>
             <label htmlFor="email" className="text-grey mb7">
               Email Address:
@@ -53,10 +52,10 @@ const MyProfile = () => {
               className="input-feild"
               id="email"
               name="email"
+              value={user?.email}
               required
             />
           </div>
-
           <div>
             <label htmlFor="region" className="text-grey mb7">
               Region:
@@ -68,7 +67,6 @@ const MyProfile = () => {
               <option value="Hyderabad">Hyderabad</option>
             </select>
           </div>
-
           <div className="buttonSets">
             <button className="btn-next btn-common" type="submit">
               Next
@@ -86,5 +84,4 @@ const MyProfile = () => {
     </div>
   );
 };
-
 export default MyProfile;

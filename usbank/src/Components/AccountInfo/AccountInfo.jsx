@@ -1,16 +1,13 @@
 import React from "react";
 import "../Profile.css";
 import { useNavigate } from "react-router-dom";
-
 const AccountInfo = () => {
   const navigate = useNavigate();
-
   const handleSubmit = (event) => {
     event.preventDefault();
     event.target.reset();
     navigate("/dashboard");
   };
-
   return (
     <>
       <div className="container-box" data-testid="container-box">
@@ -29,7 +26,6 @@ const AccountInfo = () => {
                 required
               />
             </div>
-
             <div>
               <label htmlFor="accountantsName" className="text-grey mb7">
                 Accountant's Name:
@@ -42,7 +38,6 @@ const AccountInfo = () => {
                 required
               />
             </div>
-
             <div>
               <label htmlFor="accountantsTelephone" className="text-grey mb7">
                 Accountant's Telephone Number:
@@ -55,7 +50,6 @@ const AccountInfo = () => {
                 required
               />
             </div>
-
             <div>
               <label htmlFor="accountantsEmail" className="text-grey mb7">
                 Accountant's Email Address:
@@ -68,7 +62,6 @@ const AccountInfo = () => {
                 required
               />
             </div>
-
             <div className="buttonSets">
               <button className="btn-next btn-common" type="submit">
                 Submit
@@ -89,5 +82,4 @@ const AccountInfo = () => {
     </>
   );
 };
-
 export default AccountInfo;

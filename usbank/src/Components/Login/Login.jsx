@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-
 export default function Login() {
   const {
     register,
@@ -12,9 +11,7 @@ export default function Login() {
   } = useForm();
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    const existingUsers = JSON.parse(
-      sessionStorage.getItem("registrationData")
-    );
+    const existingUsers = JSON.parse(localStorage.getItem("registrationData"));
     const authenticatedUser = existingUsers?.find(
       (user) =>
         user?.username === data?.username && user?.password === data?.password
@@ -24,7 +21,7 @@ export default function Login() {
         userName: data.username,
         validUser: true,
       };
-      sessionStorage.setItem("loggedin-user", JSON.stringify(userInfo));
+      localStorage.setItem("loggedin-user", JSON.stringify(userInfo));
       reset();
       navigate("/dashboard");
     } else {
@@ -34,7 +31,10 @@ export default function Login() {
   };
   return (
     <div className="login-info--wrapper">
-      <h3 className="login-info--header row col-12 d-flex justify-content-center" data-testid="login-header">
+      <h3
+        className="login-info--header row col-12 d-flex justify-content-center"
+        data-testid="login-header"
+      >
         Log into BMS below
       </h3>
       <form onSubmit={handleSubmit(onSubmit)} className="bms-form">
@@ -65,19 +65,25 @@ export default function Login() {
         </div>
         <input type="submit" className="input-button" value="Login" />
       </form>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        
-      }}>
-        <h5 className="register-link" style={{marginTop:"10px",marginLeft:"0px"}}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h5
+          className="register-link"
+          style={{ marginTop: "10px", marginLeft: "0px" }}
+        >
           If you haven't registered Please
           <div
             onClick={() => navigate("/register")}
             className="register-button"
           >
-            <h5 style={{marginTop:"10px",marginLeft:"40px"}}><a href = "."> Register here </a></h5>
+            <h5 style={{ marginTop: "10px", marginLeft: "40px" }}>
+              <a href="."> Register here </a>
+            </h5>
           </div>
         </h5>
       </div>
