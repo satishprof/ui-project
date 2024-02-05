@@ -9,11 +9,12 @@ import Register from "./Components/Register/Register";
 import HomePage from "./Components/HomePage/HomePage";
 import { ContextProvider } from "./Components/Context/Context";
 import { useState } from "react";
+
 function App() {
   const [toggle, setToggle] = useState(false);
+
   return (
     <>
-      {/* {/ <HomePage /> /} */}
       <div>
         <BrowserRouter>
           <ContextProvider>

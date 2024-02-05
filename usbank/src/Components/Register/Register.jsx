@@ -11,7 +11,6 @@ export default function Register() {
   } = useForm();
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    console.log("data", data);
     const existingUsers = JSON.parse(localStorage.getItem("registrationData"));
     const currentUser = existingUsers?.find(
       (user) => user?.username === data?.username

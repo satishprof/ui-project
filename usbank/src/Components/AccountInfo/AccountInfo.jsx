@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../Profile.css";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/Context";
+
 const AccountInfo = () => {
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     event.target.reset();
     navigate("/dashboard");
   };
+
   return (
     <>
       <div className="container-box" data-testid="container-box">
@@ -60,6 +65,7 @@ const AccountInfo = () => {
                 className="input-feild"
                 name="accountantsEmail"
                 required
+                value={user?.email}
               />
             </div>
             <div className="buttonSets">

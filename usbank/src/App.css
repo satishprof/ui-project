@@ -23,7 +23,7 @@
 .bms-select--field {
   width: 100%;
   margin: 0.5rem 0;
-  height:35px
+  height: 35px;
 }
 
 .bms-input--field {
@@ -46,20 +46,4 @@
   padding-left: 1rem;
   margin: 0 0 0.2rem 0;
   color: red;
-}
-
-.cta-submit {
-  text-decoration: none;
-  color: #fff;
-  background: darkmagenta;
-  padding: 0.5rem 2rem;
-  border-radius: 5px;
-  border: 0;
-  margin: 1rem;
-  font-size: 1rem;
-}
-
-.cta-submit:hover {
-  background: initial;
-  border: 1px solid #fff;
 }

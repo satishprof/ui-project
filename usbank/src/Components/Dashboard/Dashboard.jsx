@@ -1,24 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardGrid from "../DashboardGrid/DashboardGrid";
 import MyProfile from "../MyProfile/MyProfile";
 import AccountInfo from "../AccountInfo/AccountInfo";
+import { UserContext } from "../Context/Context";
+
 const Dashboard = ({ toggle }) => {
   const [isDashboard, setIsDashboard] = useState(true);
   const [isMyProfile, setIsMyProfile] = useState();
   const [isAccountInfo, setIsAccountInfo] = useState();
   const navigate = useNavigate();
   const loggedInUserInfo = JSON.parse(localStorage.getItem("loggedin-user"));
-  console.log("toggle", toggle?.toggle);
+  const { user, setUser } = useContext(UserContext);
+  const firstName = user?.firstname.toString();
+  const lastName = user?.lastname.toString();
   useEffect(() => {
     if (!loggedInUserInfo) {
       navigate("/");
     }
   }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("loggedin-user");
     navigate("/");
   };
+
   return (
     <div className="container-dashboard" data-testid="container-dashboard">
       <div className="row">
@@ -66,7 +72,8 @@ const Dashboard = ({ toggle }) => {
         <div className="col-9 grid">
           <div className="dashboard-heading">
             <h3 className="title" style={{ margin: "auto" }}>
-              Welcome User
+              Welcome {firstName.charAt(0).toUpperCase() + firstName.slice(1)}{" "}
+              {lastName.charAt(0).toUpperCase() + lastName.slice(1)}
             </h3>
             <button
               type="button"

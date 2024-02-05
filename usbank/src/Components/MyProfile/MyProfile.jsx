@@ -7,11 +7,12 @@ const MyProfile = () => {
   const [submitted, setSubmitted] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  console.log("user", user, setUser);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     navigate("/account");
   };
+
   return (
     <div className="container-box" data-testid="container-box">
       <h2 className="heading-text">My Profile</h2>
