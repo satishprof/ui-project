@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 
 import { BrowserRouter } from "react-router-dom";
-import AccountInfo from "./AccountInfo";
+import LoanDetails from "./LoanDetails";
 
-describe("AccountInfo", () => {
-  test("Expect AccountInfo to render", () => {
+describe("LoanDetails", () => {
+  test("Expect LoanDetails to render", () => {
     render(
       <BrowserRouter>
-        <AccountInfo />
+        <LoanDetails />
       </BrowserRouter>
     );
     expect(screen.getByTestId("container-box")).toBeInTheDocument();

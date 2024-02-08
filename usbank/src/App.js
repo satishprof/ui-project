@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import MyPRofile from "./Components/MyProfile/MyProfile";
-import Account from "./Components/AccountInfo/AccountInfo";
+import LoanDetails from "./Components/LoanInformation/LoanDetails";
 import LandingPage from "./Components/Landing/LandingPage";
 import NavBar from "./Components/Navbar/NavBar";
 import Login from "./Components/Login/Login";
@@ -24,11 +24,11 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route
-                path="/Landingpage"
+                path="/landingpage"
                 element={<LandingPage toggle={{ toggle }} />}
               ></Route>
-              <Route path="/account/:id" element={<Account />}></Route>
-              {/* <Route path="/myprofile" element={<MyPRofile />}></Route> */}
+              <Route path="/account/:id" element={<LoanDetails />}></Route>
+              <Route path="/myprofile" element={<MyPRofile />}></Route>
             </Routes>
           </ContextProvider>
         </BrowserRouter>

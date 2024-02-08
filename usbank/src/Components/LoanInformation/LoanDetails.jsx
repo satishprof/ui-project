@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import "../Styles.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/Context";
 import { useState } from "react";
 import axios from "axios";
 
-const AccountInfo = () => {
+const LoanDetails = () => {
   const [data, setData] = useState();
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
@@ -21,10 +21,6 @@ const AccountInfo = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  let { id } = useParams();
-  console.log(data, "data");
-  const filteredData = data && data?.filter((item) => String(item.id) === id);
-  console.log(filteredData, "fdata");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,7 +43,7 @@ const AccountInfo = () => {
                 id="loanId"
                 className="input-feild"
                 name="loanId"
-                value={filteredData?.id || ""}
+                // value={filteredData?.id || ""}
                 required
               />
             </div>
@@ -60,7 +56,7 @@ const AccountInfo = () => {
                 id="purposeOfLoan"
                 className="input-feild"
                 name="purposeOfLoan"
-                value={filteredData?.purpose || ""}
+                // value={filteredData?.purpose || ""}
                 required
               />
             </div>
@@ -73,7 +69,7 @@ const AccountInfo = () => {
                 id="status"
                 className="input-feild"
                 name="status"
-                value={filteredData?.status || ""}
+                // value={filteredData?.status || ""}
                 required
               />
             </div>
@@ -109,4 +105,4 @@ const AccountInfo = () => {
     </>
   );
 };
-export default AccountInfo;
+export default LoanDetails;

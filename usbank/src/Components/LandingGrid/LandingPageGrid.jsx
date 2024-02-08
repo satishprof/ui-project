@@ -33,7 +33,10 @@ const LandingPageGrid = () => {
       Header: "Options",
       accessor: "options",
       Cell: ({ row }) => (
-        <button onClick={() => handleButtonClick(row)}>
+        <button
+          onClick={() => handleButtonClick(row)}
+          style={{ backgroundColor: "#3498db" }}
+        >
           {ids.includes(row.original.id) ? "Save" : "Edit"}
         </button>
       ),

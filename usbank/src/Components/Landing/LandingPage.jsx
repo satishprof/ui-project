@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import LandingPageGrid from "../LandingGrid/LandingPageGrid";
 import MyProfile from "../MyProfile/MyProfile";
-import AccountInfo from "../AccountInfo/AccountInfo";
+import LoanDetails from "../LoanInformation/LoanDetails";
 import { UserContext } from "../Context/Context";
 
 const LandingPage = ({ toggle }) => {
@@ -95,7 +95,7 @@ const LandingPage = ({ toggle }) => {
               Logout
             </button>
           </div>
-          {isAccountInfo && <AccountInfo />}
+          {isAccountInfo && <LoanDetails />}
           {isDashboard && <LandingPageGrid />}
           {isMyProfile && <MyProfile />}
         </div>

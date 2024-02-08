@@ -6,7 +6,6 @@ export default function Register() {
     register,
     formState: { errors },
     handleSubmit,
-    getValues,
     reset,
   } = useForm();
   const navigate = useNavigate();
@@ -46,7 +45,7 @@ export default function Register() {
       </h3>
       <form onSubmit={handleSubmit(onSubmit)} className="bms-form">
         <div className="bms-input--wrapper">
-          <label>
+          <label className="mt-2">
             Firstname:
             <input
               {...register("firstname", {

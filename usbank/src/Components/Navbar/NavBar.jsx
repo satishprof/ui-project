@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import logo2 from "../images/logo2.png";
+import USBankLogo from "../images/USBankLogo.png";
 import "../Styles.css";
 
 const NavBar = ({ toggle }) => {
@@ -22,7 +22,7 @@ const NavBar = ({ toggle }) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <img
-              src={logo2}
+              src={USBankLogo}
               width={100}
               height={50}
               className="navbar-brand"

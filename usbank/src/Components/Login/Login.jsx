@@ -34,14 +34,14 @@ export default function Login() {
   return (
     <div className="login-info--wrapper">
       <h3
-        className="login-info--header row col-12 d-flex justify-content-center"
+        className="login-info--header row col-12 d-flex justify-content-center pt-4 pb-4"
         data-testid="login-header"
       >
-        Log into BMS below
+        Please Login Here..
       </h3>
       <form onSubmit={handleSubmit(onSubmit)} className="bms-form">
         <div className="bms-input--wrapper">
-          <label>
+          <label className="mt-4">
             Username:
             <input
               {...register("username", { required: "Username is required" })}
@@ -65,7 +65,7 @@ export default function Login() {
             <p className="bms-form-error-message">{errors.password.message}</p>
           )}
         </div>
-        <input type="submit" className="input-button" value="Login" />
+        <input type="submit" className="input-button mb-3" value="Login" />
       </form>
       <div
         style={{
@@ -78,13 +78,13 @@ export default function Login() {
           className="register-link"
           style={{ marginTop: "10px", marginLeft: "0px" }}
         >
-          If you haven't registered Please
+          If you haven't registered Please click below
           <div
             onClick={() => navigate("/register")}
             className="register-button"
           >
-            <h5 style={{ marginTop: "10px", marginLeft: "40px" }}>
-              <a href="."> Register here </a>
+            <h5 style={{ marginTop: "10px", marginLeft: "150px" }}>
+              <Link to="/register"> Register here </Link>
             </h5>
           </div>
         </h5>
