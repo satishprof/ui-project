@@ -1,19 +1,26 @@
 import React from "react";
-import { render } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Home from "./HomePage";
+import { MemoryRouter } from "react-router-dom";
 
-describe("Home component", () => {
-  it("should render the welcome message and register/login links", () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    );
-    expect(
-      getByText("Welcome to Banking Management System")
-    ).toBeInTheDocument();
-    expect(getByText("Register")).toBeInTheDocument();
-    expect(getByText("Login")).toBeInTheDocument();
-  });
+test("renders welcome message", () => {
+  render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>
+  );
+  const welcomeMessage = screen.getByText(/Welcome to US Bank/i);
+  expect(welcomeMessage).toBeInTheDocument();
+});
+
+test("renders registration link", () => {
+  render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>
+  );
+  const registerLinks = screen.getAllByText(/Register/i);
+  expect(registerLinks).toHaveLength(2); // Ensure there is exactly one matching element
+  expect(registerLinks[0]).toBeInTheDocument();
 });

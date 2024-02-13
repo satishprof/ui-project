@@ -1,16 +1,19 @@
 import React, { useContext } from "react";
 import "../Styles.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { UserContext } from "../Context/Context";
+
 const MyProfile = () => {
-  const [submitted, setSubmitted] = useState(false);
+  const location = useLocation();
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/account");
+    navigate("/account", {
+      state: { id: location?.state?.id, data: location?.state?.data },
+    });
   };
 
   return (
@@ -75,7 +78,10 @@ const MyProfile = () => {
             <button
               className="btn-cancel btn-common"
               type="button"
-              onClick={() => navigate("/landingpage")}
+              onClick={() => {
+                window.location.reload();
+                navigate("/landingpage");
+              }}
             >
               Cancel
             </button>

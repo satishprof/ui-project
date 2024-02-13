@@ -27,7 +27,7 @@ function App() {
                 path="/landingpage"
                 element={<LandingPage toggle={{ toggle }} />}
               ></Route>
-              <Route path="/account/:id" element={<LoanDetails />}></Route>
+              <Route path="/account" element={<LoanDetails />}></Route>
               <Route path="/myprofile" element={<MyPRofile />}></Route>
             </Routes>
           </ContextProvider>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   useTable,
   useSortBy,
@@ -7,16 +8,19 @@ import {
 } from "react-table";
 import { useNavigate } from "react-router-dom";
 import "../Styles.css";
-import axios from "axios";
+import ConfirmBox from "../ConfirmBox/ConfirmBox";
 
 const LandingPageGrid = () => {
   const [data, setData] = useState([]);
+  const [selectedData, setSelectedData] = useState({});
   const navigate = useNavigate();
-  const [ids, setIds] = useState([]);
+  const [id, setId] = useState("-1");
+  const [showPopup, setShowPopup] = useState(false);
+  const [actionType, setActionType] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/loaninfo")
+      .put("http://localhost:4000/loandetails/145", { name: "name", id: "id" })
       .then((response) => {
         setData(response.data);
       })
@@ -25,6 +29,34 @@ const LandingPageGrid = () => {
       });
   }, []);
 
+  const handleOk = () => {
+    if (actionType && actionType === "EDIT") {
+      setId("-1");
+      setShowPopup(false);
+      setActionType("");
+      navigate("/myprofile", { state: { id: id, data: selectedData } });
+    }
+    if (actionType && actionType === "DELETE") {
+      axios
+        .delete(`http://localhost:4000/loandetails/${id}`, {
+          name: "name",
+          id: "id",
+        })
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+      setId("-1");
+      setShowPopup(false);
+      setActionType("");
+    }
+  };
+  const handleClose = () => {
+    setShowPopup(false);
+    setActionType("");
+  };
   const columns = [
     { Header: "Loan Id", accessor: "id" },
     { Header: "Purpose of Loan", accessor: "purpose" },
@@ -33,27 +65,36 @@ const LandingPageGrid = () => {
       Header: "Options",
       accessor: "options",
       Cell: ({ row }) => (
-        <button
-          onClick={() => handleButtonClick(row)}
-          style={{ backgroundColor: "#3498db" }}
-        >
-          {ids.includes(row.original.id) ? "Save" : "Edit"}
-        </button>
+        <>
+          {row.original.status === "Submitted" ? (
+            <button
+              className={"btn btn-container btn-danger"}
+              onClick={() => handleButtonClick("DELETE", row.original.id)}
+            >
+              Delete
+            </button>
+          ) : (
+            <button
+              className={"btn btn-container"}
+              style={{ backgroundColor: "#3498db" }}
+              onClick={() =>
+                handleButtonClick("EDIT", row.original.id, row.original)
+              }
+            >
+              {}
+              Edit
+            </button>
+          )}
+        </>
       ),
     },
   ];
 
-  const handleButtonClick = (row) => {
-    const clickedId = row.original.id;
-    // Check if the ID is already in the array
-    if (!ids.includes(clickedId)) {
-      // If not, update the state by adding the ID to the array
-      setIds((prevIds) => [...prevIds, clickedId]);
-    } else {
-      // If the ID is already in the array, remove it
-      setIds((prevIds) => prevIds.filter((id) => id !== clickedId));
-    }
-    navigate(`/account/${clickedId}`);
+  const handleButtonClick = (type, id, data = {}) => {
+    setId(id);
+    setShowPopup(true);
+    setActionType(type);
+    setSelectedData(data);
   };
 
   const Grid = () => {
@@ -63,7 +104,7 @@ const LandingPageGrid = () => {
       headerGroups,
       page,
       prepareRow,
-      state: { pageIndex, pageSize, globalFilter },
+      state: { pageIndex, globalFilter },
       setGlobalFilter,
       gotoPage,
       previousPage,
@@ -98,11 +139,7 @@ const LandingPageGrid = () => {
                   <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render("Header")}
                     <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " 🔽"
-                          : " 🔼"
-                        : ""}
+                      {column.isSorted && column.isSortedDesc ? " 🔽" : " 🔼"}
                     </span>
                   </th>
                 ))}
@@ -152,6 +189,18 @@ const LandingPageGrid = () => {
   return (
     <div className="App" data-testid="grid">
       <Grid />
+      {showPopup && (
+        <ConfirmBox
+          handleOk={handleOk}
+          handleClose={handleClose}
+          description={
+            actionType === "EDIT"
+              ? "Are you sure. You Want to Edit The Loan."
+              : "Are you sure. You Want to Delete Loan"
+          }
+          title={actionType === "EDIT" ? "Edit The Loan." : "Delete Loan"}
+        />
+      )}
     </div>
   );
 };

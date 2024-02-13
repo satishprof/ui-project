@@ -1,75 +1,60 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "../Styles.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/Context";
-import { useState } from "react";
 import axios from "axios";
 
 const LoanDetails = () => {
-  const [data, setData] = useState();
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/loaninfo")
-      .then((response) => {
-        console.log(response, "response");
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
-  const handleSubmit = (event) => {
+  const { user, setUser } = useContext(UserContext);
+  const location = useLocation();
+  console.log("location", location);
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    event.target.reset();
+    if (location?.state?.id) {
+      await axios
+        .put(`http://localhost:4000/loandetails/${location?.state?.id}`, {
+          ...location?.state?.data,
+          status: "Submitted",
+        })
+        .then((response) => {
+          console.log("response");
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+      event.target.reset();
+    }
     navigate("/landingpage");
   };
 
   return (
     <>
       <div className="container-box" data-testid="container-box">
-        <h2 className="heading-text">Account Information</h2>
+        <h2 className="heading-text">Loan Details</h2>
         <div className="form container">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="loanId" className="text-grey mb7">
-                LoanId:
+              <label htmlFor="accountingFirm" className="text-grey mb7">
+                Accounting Firm:
               </label>
               <input
-                type="number"
-                id="loanId"
+                type="text"
+                id="accountingFirm"
                 className="input-feild"
-                name="loanId"
-                // value={filteredData?.id || ""}
+                name="accountingFirm"
                 required
               />
             </div>
             <div>
-              <label htmlFor="purposeOfLoan" className="text-grey mb7">
-                Purpose of Loan:
+              <label htmlFor="accountantsName" className="text-grey mb7">
+                Accountant's Name:
               </label>
               <input
                 type="text"
-                id="purposeOfLoan"
+                id="accountantsName"
                 className="input-feild"
-                name="purposeOfLoan"
-                // value={filteredData?.purpose || ""}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="status" className="text-grey mb7">
-                Status:
-              </label>
-              <input
-                type="text"
-                id="status"
-                className="input-feild"
-                name="status"
-                // value={filteredData?.status || ""}
+                name="accountantsName"
                 required
               />
             </div>
@@ -85,14 +70,28 @@ const LoanDetails = () => {
                 required
               />
             </div>
+            <div>
+              <label htmlFor="accountantsEmail" className="text-grey mb7">
+                Accountant's Email Address:
+              </label>
+              <input
+                type="email"
+                id="accountantsEmail"
+                className="input-feild"
+                name="accountantsEmail"
+                required
+                value={user?.email}
+              />
+            </div>
             <div className="buttonSets">
-              <button className="btn-next btn-common" type="submit">
+              <button className="btn btn-primary mx-3" type="submit">
                 Submit
               </button>
               <button
-                className="btn-cancel btn-common"
+                className="btn btn-secondary"
                 type="button"
                 onClick={() => {
+                  window.location.reload();
                   navigate("/landingpage");
                 }}
               >

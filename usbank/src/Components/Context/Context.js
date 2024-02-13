@@ -20,7 +20,6 @@ export const ContextProvider = ({ children }) => {
       });
     } else {
       const userData = JSON.parse(user1);
-      console.log(userData[0], "data");
       setUser({
         firstname: userData[0]?.firstname,
         lastname: userData[0]?.lastname,
