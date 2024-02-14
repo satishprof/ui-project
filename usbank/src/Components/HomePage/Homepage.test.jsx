@@ -1,6 +1,5 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import Home from "./HomePage";
 import { MemoryRouter } from "react-router-dom";
 

@@ -6,9 +6,9 @@ import axios from "axios";
 
 const LoanDetails = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const location = useLocation();
-  console.log("location", location);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (location?.state?.id) {
@@ -17,9 +17,7 @@ const LoanDetails = () => {
           ...location?.state?.data,
           status: "Submitted",
         })
-        .then((response) => {
-          console.log("response");
-        })
+        .then((response) => {})
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
@@ -91,7 +89,6 @@ const LoanDetails = () => {
                 className="btn btn-secondary"
                 type="button"
                 onClick={() => {
-                  window.location.reload();
                   navigate("/landingpage");
                 }}
               >
@@ -104,4 +101,5 @@ const LoanDetails = () => {
     </>
   );
 };
+
 export default LoanDetails;

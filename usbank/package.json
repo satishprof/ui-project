@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!axios)/'",
     "eject": "react-scripts eject",
-    "coverage": "react-scripts test --coverage --watchAll collectCoverageFrom='src/components/**/*.{js,jsx}'"
+    "coverage": "react-scripts test --coverage --watchAll"
   },
   "eslintConfig": {
     "extends": [

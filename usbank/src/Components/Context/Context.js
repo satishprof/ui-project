@@ -9,21 +9,20 @@ export const ContextProvider = ({ children }) => {
     email: "",
   });
 
-  const user1 = sessionStorage.getItem("registrationData");
-
   useEffect(() => {
-    if (user1 == null) {
+    const userdata = sessionStorage.getItem("registrationData");
+    if (userdata === null) {
       setUser({
         firstname: "",
         lastname: "",
         email: "",
       });
     } else {
-      const userData = JSON.parse(user1);
+      const userData = JSON.parse(userdata);
       setUser({
-        firstname: userData[0]?.firstname,
-        lastname: userData[0]?.lastname,
-        email: userData[0]?.mail,
+        firstname: userData[0]?.firstname || "",
+        lastname: userData[0]?.lastname || "",
+        email: userData[0]?.mail || "",
       });
     }
   }, []);

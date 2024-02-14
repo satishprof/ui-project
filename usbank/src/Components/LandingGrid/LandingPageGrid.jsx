@@ -29,7 +29,7 @@ const LandingPageGrid = () => {
       });
   }, []);
 
-  const handleOk = () => {
+  const handleYesBtn = () => {
     if (actionType && actionType === "EDIT") {
       setId("-1");
       setShowPopup(false);
@@ -53,7 +53,7 @@ const LandingPageGrid = () => {
       setActionType("");
     }
   };
-  const handleClose = () => {
+  const handleNoBtn = () => {
     setShowPopup(false);
     setActionType("");
   };
@@ -191,12 +191,12 @@ const LandingPageGrid = () => {
       <Grid />
       {showPopup && (
         <ConfirmBox
-          handleOk={handleOk}
-          handleClose={handleClose}
+          handleYesBtn={handleYesBtn}
+          handleNoBtn={handleNoBtn}
           description={
             actionType === "EDIT"
-              ? "Are you sure. You Want to Edit The Loan."
-              : "Are you sure. You Want to Delete Loan"
+              ? "Are you sure, you want to edit the loan ?"
+              : "Are you sure, you want to delete loann ?"
           }
           title={actionType === "EDIT" ? "Edit The Loan." : "Delete Loan"}
         />

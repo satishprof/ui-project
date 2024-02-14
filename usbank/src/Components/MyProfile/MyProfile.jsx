@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import "../Styles.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
 import { UserContext } from "../Context/Context";
 
 const MyProfile = () => {
   const location = useLocation();
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -69,6 +68,8 @@ const MyProfile = () => {
               <option value="Mumbai">Mumbai</option>
               <option value="Delhi">Delhi</option>
               <option value="Hyderabad">Hyderabad</option>
+              <option value="Hyderabad">Kochi</option>
+              <option value="Hyderabad">Kolkatha</option>
             </select>
           </div>
           <div className="buttonSets">
@@ -79,7 +80,6 @@ const MyProfile = () => {
               className="btn-cancel btn-common"
               type="button"
               onClick={() => {
-                window.location.reload();
                 navigate("/landingpage");
               }}
             >

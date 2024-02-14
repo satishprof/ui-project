@@ -2,10 +2,10 @@ import React from "react";
 
 const ConfirmBox = ({
   show = true,
-  handleClose,
+  handleNoBtn,
   title,
   description,
-  handleOk,
+  handleYesBtn,
 }) => {
   return (
     <div
@@ -20,7 +20,7 @@ const ConfirmBox = ({
         <div
           className="modal-content"
           style={{
-            backgroundColor: "rgba(255,255,255,0.9)",
+            backgroundColor: "rgba(263,263,263,0.9)",
             color: "#000",
             zIndex: 10000,
           }}
@@ -31,7 +31,7 @@ const ConfirmBox = ({
               type="button"
               className="btn-close"
               aria-label="Close"
-              onClick={handleClose}
+              onClick={handleNoBtn}
             ></button>
           </div>
           <div className="modal-body">{description}</div>
@@ -39,16 +39,17 @@ const ConfirmBox = ({
             <button
               type="button"
               className="btn btn-secondary"
-              onClick={handleClose}
+              onClick={handleNoBtn}
             >
-              Cancel
+              No
             </button>
             <button
               type="button"
-              className="btn btn-primary"
-              onClick={handleOk}
+              style={{ backgroundColor: "#3498db" }}
+              className="btn"
+              onClick={handleYesBtn}
             >
-              OK
+              Yes
             </button>
           </div>
         </div>
