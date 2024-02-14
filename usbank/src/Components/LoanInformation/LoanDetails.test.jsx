@@ -1,35 +1,61 @@
-import { render, screen } from "@testing-library/react";
-
+import React from "react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
+import { UserContext } from "../Context/Context";
 import LoanDetails from "./LoanDetails";
 
 describe("LoanDetails", () => {
-  // Mock the react-router-dom useNavigate hook
-  jest.mock("react-router-dom", () => ({
-    ...jest.requireActual("react-router-dom"),
-    useNavigate: jest.fn(),
-  }));
+  const user = {
+    email: "john.doe@example.com",
+  };
 
-  // Mock the UserContext
-  jest.mock("../Context/Context", () => ({
-    UserContext: {
-      Consumer: ({ children }) =>
-        children({
-          user: {
-            firstname: "John",
-            lastname: "Doe",
-            email: "satish1234@gmail.com",
-          },
-        }),
+  const location = {
+    state: {
+      id: 123,
+      date: {
+        /* your date object here */
+      },
     },
-  }));
+  };
 
-  test("Expect LoanDetails to render", () => {
+  test("renders LoanDetails component", () => {
     render(
       <BrowserRouter>
-        <LoanDetails />
+        <UserContext.Provider value={{ user }}>
+          <LoanDetails />
+        </UserContext.Provider>
       </BrowserRouter>
     );
+
     expect(screen.getByTestId("container-box")).toBeInTheDocument();
+    expect(screen.getByText("Loan Details")).toBeInTheDocument();
+  });
+
+  test("form submission with valid data", async () => {
+    render(
+      <BrowserRouter>
+        <UserContext.Provider value={{ user }}>
+          <LoanDetails />
+        </UserContext.Provider>
+      </BrowserRouter>
+    );
+
+    const submitButton = screen.getByText("Submit");
+    fireEvent.click(submitButton);
+    await waitFor(() => {
+      expect(window.location.pathname).toBe("/landingpage");
+    });
+  });
+
+  test("Cancel button redirects to landing page", () => {
+    const { container } = render(
+      <BrowserRouter>
+        <UserContext.Provider value={{ user }}>
+          <LoanDetails />
+        </UserContext.Provider>
+      </BrowserRouter>
+    );
+    const cancelButton = container.querySelector('button[type="button"]');
+    fireEvent.click(cancelButton);
   });
 });

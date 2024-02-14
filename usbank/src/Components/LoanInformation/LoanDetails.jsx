@@ -8,6 +8,7 @@ const LoanDetails = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const location = useLocation();
+  console.log(location, "location");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
